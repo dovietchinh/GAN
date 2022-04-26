@@ -6,7 +6,7 @@ class Discriminator(torch.nn.Module):
         super(Discriminator,self).__init__()
         self.Sequence = torch.nn.ModuleList()
         self.szie = 28*28
-        self.Sequence.append(torch.nn.Conv2d(3,64,(3,3),stride=(2,2),padding=1))
+        self.Sequence.append(torch.nn.Conv2d(1,64,(3,3),stride=(2,2),padding=1))
         self.Sequence.append(torch.nn.ReLU())
         self.Sequence.append(torch.nn.Dropout(0.4))
         self.Sequence.append(torch.nn.Conv2d(64,64,(3,3),stride=(2,2),padding=1)) 
@@ -35,7 +35,7 @@ class Generator(torch.nn.Module):
         self.Sequence.append(torch.nn.ReLU())
         self.Sequence.append(torch.nn.ConvTranspose2d(128,128,(4,4),stride=2,padding=1))
         self.Sequence.append(torch.nn.ReLU())
-        self.Sequence.append(torch.nn.Conv2d(128,3,(7,7),stride=1,padding=3))
+        self.Sequence.append(torch.nn.Conv2d(128,1,(7,7),stride=1,padding=3))
         self.Sequence.append(torch.nn.Sigmoid())
 
     def forward(self,x):
@@ -43,13 +43,14 @@ class Generator(torch.nn.Module):
             if index == 2:
                 x = torch.reshape(x,(-1,128,7,7))
             x = module(x)
-            print(x.shape)
+            # print(x.shape)
         return x
 
 
-class GAN():
+class GAN(torch.nn.Module):
 
     def __init__(self,d_model,g_model):
+        super(GAN,self).__init__()
         self.d_model = d_model
         self.g_model = g_model
 
@@ -61,10 +62,16 @@ class GAN():
 
 
 if __name__ =='__main__':
-    # x = torch.rand(1,3,28,28)
-    # model = Discriminator();
-    # print(model(x))
-    x = torch.rand(2,100)
-    model = Generator();
-    y = model(x)
-    print(y.shape)
+    x = torch.rand(10,1,28,28)
+    # g_model = 
+    d_model = Discriminator();
+    # # print(model(x))
+    
+    # x = torch.rand(2,100)
+    g_model = Generator();
+    d_model(x)
+    # gan_model = GAN(d_model,g_model)
+    # print(gan_model.d_model is d_model)
+    # print(gan_model.g_model is g_model)
+    # y = model(x)
+    # print(y.shape)

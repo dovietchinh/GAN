@@ -1,3 +1,4 @@
 GAN_MNIST/data/
 GAN_MNIST/log_tensorboard
 GAN_MNIST/__pycache__
+GAN_MNIST/saved_model
