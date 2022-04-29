@@ -7,7 +7,7 @@ import model
 def main():
     device = torch.device('cuda:0')
     g_model = model.Generator().to(device)
-    for epoch in range(1000):
+    for epoch in range(50,1000):
         print(epoch)
         ckp = torch.load(f'saved_model/model_{epoch}.pt')
         g_model.load_state_dict(ckp['g_model'])
@@ -15,7 +15,9 @@ def main():
         sample = torch.rand(100,100).to(device)
         print('sample.max = ',sample.max())
         print('sample.min = ',sample.min())
-        view = g_model(sample) # 100,1,28,28
+        # view = g_model(sample) # 100,1,28,28
+        # view = sample
+        view = torch.rand(100,1,28,28)
         print('log1')
         print('view.shape = ',view.shape)
         print('view.max = ',view.max())
@@ -40,6 +42,8 @@ def main():
             row = index % 10
             col = index // 10
             image_view[row*28:row*28+28,col*28:col*28+28,:] = view[index]
+            print(row*28,row*28+28,col*28,col*28+28)
+            print(index)
         cv2.imshow('view',image_view.astype('uint8'))
         if cv2.waitKey(0)==ord('q'):
             break

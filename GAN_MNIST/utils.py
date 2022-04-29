@@ -8,6 +8,7 @@ class MNIST(torch.utils.data.Dataset):
         self.mnist_trainset = torchvision.datasets.MNIST(root='./data', train=is_train, download=True, transform=None)
         self.transform = torchvision.transforms.Compose([
                                 torchvision.transforms.ToTensor(),
+                                torchvision.transforms.Normalize(mean=(0.5,),std=(0.5,)),
                                 ])
     def __len__(self):
         return len(self.mnist_trainset)
