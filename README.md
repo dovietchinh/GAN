@@ -16,7 +16,7 @@ abbreviation :
 
     - stabilizing training
 
-
+asdasgd
 ## GAN (Generator Adversarial Network) Application
 
  - image-to-image transfer [153].
