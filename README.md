@@ -16,7 +16,6 @@ abbreviation :
 
     - stabilizing training
 
-sdh,cnv,xmncvhr
 ## GAN (Generator Adversarial Network) Application
 
  - image-to-image transfer [153].
